@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maya Dance Challenge 💃✨</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="disco-lights">
+    <div class="spotlight spot-1"></div>
+    <div class="spotlight spot-2"></div>
+    <div class="spotlight spot-3"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Top Bar / Audio Controls -->
+    <header class="top-nav">
+      <div class="game-branding">
+        <span class="game-icon">💃</span>
+        <span class="brand-text">Maya Dance Challenge</span>
+      </div>
+      <div class="audio-controls">
+        <button id="btn-music" class="icon-btn" title="Toggle Music" aria-label="Toggle Music">
+          <span class="btn-icon">🎵</span> <span class="btn-text">Music: On</span>
+        </button>
+        <button id="btn-sound" class="icon-btn" title="Toggle Sound FX" aria-label="Toggle Sound Effects">
+          <span class="btn-icon">🔔</span> <span class="btn-text">SFX: On</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Screens Container -->
+    <main id="game-screens">
+
+      <!-- ==================== 1. START SCREEN ==================== -->
+      <section id="screen-start" class="screen active">
+        <div class="start-card">
+          <div class="title-badge">✨ Beginner Friendly Dance Game ✨</div>
+          <h1 class="main-title">
+            <span class="title-word word-maya">MAYA</span>
+            <span class="title-word word-dance">DANCE</span>
+            <span class="title-word word-challenge">CHALLENGE</span>
+          </h1>
+          <p class="subtitle">Match Maya's cute dance moves, keep the groove, and become a dance star!</p>
+
+          <!-- Maya Preview Hero -->
+          <div class="preview-character-wrap">
+            <div id="maya-preview" class="maya-character idle">
+              <!-- Reusable Maya Character SVG will be rendered here -->
+            </div>
+            <div class="preview-shadow"></div>
+          </div>
+
+          <!-- Challenge Mode Selection -->
+          <div class="mode-selection">
+            <h3 class="section-label">Select Your Dance Challenge:</h3>
+            <div class="mode-cards">
+              <button class="mode-card active" data-mode="full">
+                <span class="mode-emoji">🏆</span>
+                <span class="mode-title">Full Show</span>
+                <span class="mode-desc">All 4 challenges in sequence!</span>
+              </button>
+              <button class="mode-card" data-mode="warmup">
+                <span class="mode-emoji">🌸</span>
+                <span class="mode-title">1. Warm-Up</span>
+                <span class="mode-desc">Single steps at an easy tempo</span>
+              </button>
+              <button class="mode-card" data-mode="memory">
+                <span class="mode-emoji">🧠</span>
+                <span class="mode-title">2. Memory Dance</span>
+                <span class="mode-desc">Watch Maya & repeat routine</span>
+              </button>
+              <button class="mode-card" data-mode="rhythm">
+                <span class="mode-emoji">⚡</span>
+                <span class="mode-title">3. Rhythm Rush</span>
+                <span class="mode-desc">Catch beats on the hit bar!</span>
+              </button>
+              <button class="mode-card" data-mode="finale">
+                <span class="mode-emoji">🌟</span>
+                <span class="mode-title">4. Grand Finale</span>
+                <span class="mode-desc">Fast fun combo choreography!</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Start Button -->
+          <div class="start-action-row">
+            <button id="btn-start-game" class="btn-primary pulse-btn">
+              <span class="btn-star">⭐</span> START DANCING! <span class="btn-star">⭐</span>
+            </button>
+          </div>
+
+          <!-- Controls Help -->
+          <div class="how-to-play">
+            <h4>🎮 How to Play:</h4>
+            <div class="instructions-grid">
+              <div class="instruction-item">
+                <div class="key-badge">⬅️ / A</div>
+                <span>Left Step</span>
+              </div>
+              <div class="instruction-item">
+                <div class="key-badge">⬆️ / W</div>
+                <span>Jump High</span>
+              </div>
+              <div class="instruction-item">
+                <div class="key-badge">⬇️ / S</div>
+                <span>Shimmy Down</span>
+              </div>
+              <div class="instruction-item">
+                <div class="key-badge">➡️ / D</div>
+                <span>Right Step</span>
+              </div>
+              <div class="instruction-item">
+                <div class="key-badge">Space / 🌀</div>
+                <span>Star Twirl</span>
+              </div>
+            </div>
+            <p class="touch-hint">📱 You can also click or tap the dance buttons on screen!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 2. GAMEPLAY SCREEN ==================== -->
+      <section id="screen-game" class="screen">
+        <!-- Stage Heads-Up Display (HUD) -->
+        <div class="hud-bar">
+          <div class="hud-left">
+            <div class="hud-badge challenge-badge">
+              <span class="badge-label">STAGE</span>
+              <span id="hud-challenge-name" class="badge-val">Warm-Up Groove</span>
+            </div>
+            <div class="hud-badge progress-badge">
+              <span class="badge-label">PROGRESS</span>
+              <span id="hud-progress-text" class="badge-val">Move 1 / 8</span>
+            </div>
+          </div>
+
+          <div class="hud-center">
+            <div class="combo-container">
+              <div id="hud-combo-tag" class="combo-tag">COMBO</div>
+              <div id="hud-combo-val" class="combo-number">0x</div>
+            </div>
+          </div>
+
+          <div class="hud-right">
+            <div class="hud-badge score-badge">
+              <span class="badge-label">SCORE</span>
+              <span id="hud-score-val" class="badge-val">0</span>
+            </div>
+            <div class="stars-meter">
+              <span id="star-1" class="hud-star">⭐</span>
+              <span id="star-2" class="hud-star">⭐</span>
+              <span id="star-3" class="hud-star">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dance Stage Arena -->
+        <div class="stage-arena">
+          <!-- Floating judgment / feedback (PERFECT, GREAT, NICE, MISS) -->
+          <div id="feedback-anchor" class="feedback-anchor">
+            <div id="judgment-text" class="judgment-text"></div>
+          </div>
+
+          <!-- Prompt Cue Display / Target Meter -->
+          <div class="cue-banner-wrapper">
+            <div id="stage-status-msg" class="stage-status-msg">Get Ready to Dance!</div>
+
+            <!-- Target Beat Cue Box -->
+            <div id="target-cue-box" class="target-cue-box">
+              <div class="beat-ring" id="beat-ring"></div>
+              <div class="cue-icon" id="cue-icon">❓</div>
+              <div class="cue-label" id="cue-label">Watch Maya!</div>
+            </div>
+
+            <!-- Rhythm Runway (used for Rhythm Rush mode) -->
+            <div id="rhythm-runway" class="rhythm-runway hidden">
+              <div class="runway-target-zone">
+                <div class="target-indicator"></div>
+              </div>
+              <div id="runway-notes-layer" class="runway-notes-layer"></div>
+            </div>
+
+            <!-- Sequence Display (used for Memory Dance mode) -->
+            <div id="sequence-display" class="sequence-display hidden">
+              <div class="sequence-title">Dance Routine to Copy:</div>
+              <div id="sequence-steps-row" class="sequence-steps-row"></div>
+            </div>
+          </div>
+
+          <!-- Maya Character on Stage -->
+          <div class="stage-center">
+            <div class="stage-spotlight-floor"></div>
+            <div id="stage-maya-wrap" class="stage-maya-wrap">
+              <div id="maya-stage" class="maya-character idle">
+                <!-- SVG Character will be injected here -->
+              </div>
+              <div class="stage-shadow"></div>
+            </div>
+            <div id="dance-sparkles-container" class="sparkles-overlay"></div>
+          </div>
+
+          <!-- Pause / Return Button -->
+          <button id="btn-quit-game" class="quit-stage-btn" title="Back to Menu">✕ Exit</button>
+        </div>
+
+        <!-- Interactive Dance Pad / Controls -->
+        <div class="dance-controls-panel">
+          <div class="controls-hint-text">Press keys or tap the dance buttons:</div>
+          <div class="dance-pad-grid">
+            <button class="dance-btn btn-left" data-move="left">
+              <span class="dance-btn-icon">⬅️</span>
+              <span class="dance-btn-label">LEFT</span>
+              <span class="dance-btn-key">[A / ←]</span>
+            </button>
+            <button class="dance-btn btn-up" data-move="up">
+              <span class="dance-btn-icon">⬆️</span>
+              <span class="dance-btn-label">JUMP</span>
+              <span class="dance-btn-key">[W / ↑]</span>
+            </button>
+            <button class="dance-btn btn-down" data-move="down">
+              <span class="dance-btn-icon">⬇️</span>
+              <span class="dance-btn-label">SHIMMY</span>
+              <span class="dance-btn-key">[S / ↓]</span>
+            </button>
+            <button class="dance-btn btn-right" data-move="right">
+              <span class="dance-btn-icon">➡️</span>
+              <span class="dance-btn-label">RIGHT</span>
+              <span class="dance-btn-key">[D / →]</span>
+            </button>
+            <button class="dance-btn btn-spin" data-move="spin">
+              <span class="dance-btn-icon">🌀</span>
+              <span class="dance-btn-label">TWIRL</span>
+              <span class="dance-btn-key">[SPACE]</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 3. FINAL RESULTS SCREEN ==================== -->
+      <section id="screen-result" class="screen">
+        <canvas id="confetti-canvas"></canvas>
+        <div class="result-card">
+          <div class="result-trophy-badge">🏆</div>
+          <h2 id="result-title" class="result-title">Spectacular Performance!</h2>
+          <p id="result-subtitle" class="result-subtitle">Maya is cheering for you! You danced with incredible rhythm!</p>
+
+          <!-- Maya Victory Pose -->
+          <div class="result-character-wrap">
+            <div id="maya-result" class="maya-character dance-spin">
+              <!-- Reusable Maya Character SVG will be rendered here -->
+            </div>
+            <div class="result-rank-banner" id="result-rank-text">⭐ Sparkle Superstar ⭐</div>
+          </div>
+
+          <!-- Stars Achieved -->
+          <div class="result-stars-row">
+            <span id="res-star-1" class="res-star">⭐</span>
+            <span id="res-star-2" class="res-star">⭐</span>
+            <span id="res-star-3" class="res-star">⭐</span>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-number" id="res-score">0</span>
+              <span class="stat-label">Final Score</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number" id="res-combo">0x</span>
+              <span class="stat-label">Max Combo</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number" id="res-perfects">0</span>
+              <span class="stat-label">Perfect Moves</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number" id="res-accuracy">100%</span>
+              <span class="stat-label">Groove Accuracy</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="result-actions">
+            <button id="btn-replay" class="btn-primary">
+              <span>🔄</span> Play Again
+            </button>
+            <button id="btn-menu" class="btn-secondary">
+              <span>🏠</span> Challenge Menu
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Maya Dance Challenge &bull; Made with HTML, CSS &amp; JavaScript &bull; Enjoy the rhythm!</p>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
